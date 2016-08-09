@@ -23,6 +23,7 @@ class SimpleQuestion extends AbstractQuestion
      *      minMessage = "Your answer must be at least {{ limit }} characters long",
      *      maxMessage = "Your answer cannot be longer than {{ limit }} characters"
      * )
+     * @Assert\NotBlank()
      */
     private $correctAnswer;
 

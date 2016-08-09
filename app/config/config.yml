@@ -79,12 +79,12 @@ fos_user:
     user_class: AppBundle\Entity\User
     registration:
         form:
-            type: AppBundle\Form\User\RegistrationType
+            type: AppBundle\Form\Type\User\RegistrationType
             validation_groups: [Registration]
             #handler: app.form.handler.registration
     profile:
         form:
-            type: AppBundle\Form\User\ProfileType
+            type: AppBundle\Form\Type\User\ProfileType
             validation_groups: [Profile]
             #handler: app.form.handler.profile
     change_password:

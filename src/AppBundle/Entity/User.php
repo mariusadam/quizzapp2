@@ -22,11 +22,6 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(name="member_since", type="datetime")
-     */
-    protected $memberSince;
-
-    /**
      * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      *
      * @Assert\NotBlank(groups={"Registration", "Profile"}, message="user.not_blank.first_name")

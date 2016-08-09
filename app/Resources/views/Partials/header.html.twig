@@ -1,0 +1,43 @@
+<header class="fluid-container">
+    <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-1-2">
+                <nav class="main-menu">
+                    <ul>
+                        <li class="logo-container">
+                            <a href="{{ path("homepage") }}" class="logo">QuizzApp</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+
+            <div class="uk-width-1-2">
+                <div class="uk-clearfix"></div>
+                <nav class="info-menu uk-float-right">
+                    <ul>
+                        <li class="account">
+                            <i class="uk-icon-user"></i>
+                            <p class="uk-clearfix">
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a href="{{ path('fos_user_profile_show') }}">{{ "My account"|trans }}</a>
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('fos_user_security_login') }}">
+                                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                    <a href="{{ path('fos_user_registration_register') }}">
+                                        {{ 'layout.register'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% endif %}
+                            </p>
+
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

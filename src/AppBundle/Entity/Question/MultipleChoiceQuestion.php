@@ -23,6 +23,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
      *      joinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="answer_id", referencedColumnName="id", unique=true)}
      *      )
+     * @Assert\Count(min="1")
      * @Assert\Valid()
      */
     private $answers;
