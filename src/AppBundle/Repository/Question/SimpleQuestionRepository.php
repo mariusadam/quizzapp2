@@ -5,12 +5,12 @@ namespace AppBundle\Repository\Question;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class SingleChoiceQuestionRepository.
+ * Class SimpleQuestionRepository.
  *
  * @package AppBundle\Repository\Question
  * @author    Marius Adam  <marius.adam@evozon.com>
  */
-class SingleChoiceQuestionRepository extends EntityRepository
+class SimpleQuestionRepository extends EntityRepository
 {
 
 }

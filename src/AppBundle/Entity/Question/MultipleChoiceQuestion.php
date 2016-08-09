@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * SingleChoiceQuestion
+ * MultipleChoiceQuestion
  *
- * @ORM\Table(name="single_choice_question")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Question\SingleChoiceQuestionRepository")
+ * @ORM\Table(name="multiple_choice_question")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Question\MultipleChoiceQuestionRepository")
  */
-class SingleChoiceQuestion extends AbstractQuestion
+class MultipleChoiceQuestion extends AbstractQuestion
 {
     /**
      * @var array
@@ -21,18 +21,18 @@ class SingleChoiceQuestion extends AbstractQuestion
     private $possibleAnswers;
 
     /**
-     * @var int
+     * @var array
      *
-     * @ORM\Column(name="correctIndex", type="integer")
+     * @ORM\Column(name="correctIndexes", type="array")
      */
-    private $correctIndex;
+    private $correctIndexes;
 
     /**
      * Set possibleAnswers
      *
      * @param array $possibleAnswers
      *
-     * @return SingleChoiceQuestion
+     * @return MultipleChoiceQuestion
      */
     public function setPossibleAnswers($possibleAnswers)
     {
@@ -52,27 +52,27 @@ class SingleChoiceQuestion extends AbstractQuestion
     }
 
     /**
-     * Set correctIndex
+     * Set correctIndexes
      *
-     * @param integer $correctIndex
+     * @param array $correctIndexes
      *
-     * @return SingleChoiceQuestion
+     * @return MultipleChoiceQuestion
      */
-    public function setCorrectIndex($correctIndex)
+    public function setCorrectIndexes($correctIndexes)
     {
-        $this->correctIndex = $correctIndex;
+        $this->correctIndexes = $correctIndexes;
 
         return $this;
     }
 
     /**
-     * Get correctIndex
+     * Get correctIndexes
      *
-     * @return int
+     * @return array
      */
-    public function getCorrectIndex()
+    public function getCorrectIndexes()
     {
-        return $this->correctIndex;
+        return $this->correctIndexes;
     }
 }
 

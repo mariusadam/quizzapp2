@@ -1,0 +1,19 @@
+services:
+    app.admin.simple_question:
+        class: AppBundle\Admin\Question\SimpleQuestionAdmin
+        arguments: [~, AppBundle\Entity\Question\SimpleQuestion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Simple Questions,  group: Question types}
+
+    app.admin.single_choice_question:
+        class: AppBundle\Admin\Question\SingleChoiceQuestionAdmin
+        arguments: [~, AppBundle\Entity\Question\SingleChoiceQuestion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Single Choice Questions,  group: Question types}
+
+    app.admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        arguments: [~ , AppBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Categories,  group: Classification}
+
