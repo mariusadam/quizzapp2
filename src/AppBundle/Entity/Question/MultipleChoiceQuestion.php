@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity\Question;
 
+use AppBundle\Entity\Answer;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,65 +16,51 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MultipleChoiceQuestion extends AbstractQuestion
 {
     /**
-     * @var array
+     * @var ArrayCollection
      *
-     * @ORM\Column(name="possibleAnswers", type="array")
+     * @ORM\ManyToMany(targetEntity="\AppBundle\Entity\Answer", cascade={"persist"})
+     * @ORM\JoinTable(name="questions_answers",
+     *      joinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="answer_id", referencedColumnName="id", unique=true)}
+     *      )
+     * @Assert\Valid()
      */
-    private $possibleAnswers;
+    private $answers;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="correctIndexes", type="array")
+     * MultipleChoiceQuestion constructor.
      */
-    private $correctIndexes;
-
-    /**
-     * Set possibleAnswers
-     *
-     * @param array $possibleAnswers
-     *
-     * @return MultipleChoiceQuestion
-     */
-    public function setPossibleAnswers($possibleAnswers)
+    public function __construct()
     {
-        $this->possibleAnswers = $possibleAnswers;
+        $this->answers = new ArrayCollection();
+    }
+
+    /**
+     * @param ArrayCollection $answer
+     *
+     * @return $this
+     */
+    public function setAnswers(ArrayCollection $answer)
+    {
+        $this->answers = $answer;
 
         return $this;
     }
 
     /**
-     * Get possibleAnswers
-     *
-     * @return array
+     * @return ArrayCollection
      */
-    public function getPossibleAnswers()
+    public function getAnswers()
     {
-        return $this->possibleAnswers;
+        return $this->answers;
     }
 
-    /**
-     * Set correctIndexes
-     *
-     * @param array $correctIndexes
-     *
-     * @return MultipleChoiceQuestion
-     */
-    public function setCorrectIndexes($correctIndexes)
+    public function addAnswer(Answer $answer)
     {
-        $this->correctIndexes = $correctIndexes;
+        $this->answers->add($answer);
 
         return $this;
     }
 
-    /**
-     * Get correctIndexes
-     *
-     * @return array
-     */
-    public function getCorrectIndexes()
-    {
-        return $this->correctIndexes;
-    }
 }
 
