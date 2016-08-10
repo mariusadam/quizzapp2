@@ -81,16 +81,13 @@ fos_user:
         form:
             type: AppBundle\Form\Type\User\RegistrationType
             validation_groups: [Registration]
-            #handler: app.form.handler.registration
     profile:
         form:
             type: AppBundle\Form\Type\User\ProfileType
             validation_groups: [Profile]
-            #handler: app.form.handler.profile
     change_password:
         form:
             validation_groups: [Default, ChangePassword]
-            #handler: app.form.handler.change_password
 
 sonata_admin:
     title: 'QuizzApp'

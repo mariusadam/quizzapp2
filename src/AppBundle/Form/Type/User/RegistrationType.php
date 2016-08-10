@@ -26,29 +26,24 @@ class RegistrationType extends AbstractType
             ->remove('username')
             ->add('firstName', 'text', [
                 'required' => true,
-                'attr' => ['class' => 'uk-width-1-1', 'placeholder' => 'user.placeholder.firstName.label'],
-                'label' => 'user.form.firstName.label',
+                'label' => 'First name',
             ])
             ->add('lastName', 'text', [
                 'required' => true,
-                'attr' => ['class' => 'uk-width-1-1', 'placeholder' => 'user.placeholder.lastName.label'],
-                'label' => 'user.form.lastName.label',
+                'label' => 'Last name',
             ])
             ->add('email', 'email', [
                 'required' => true,
-                'attr' => ['class' => 'uk-width-1-1', 'placeholder' => 'user.placeholder.email.label'],
-                'label' => 'user.form.email.label',
+                'label' => 'Email',
             ])
             ->add('plainPassword', 'repeated', [
                 'required' => true,
                 'type' => 'password',
                 'first_options' => [
                     'label' => 'Password',
-                    'attr' => ['class' => 'uk-width-1-1', 'placeholder' => 'user.placeholder.password.label'],
                 ],
                 'second_options' => [
                     'label' => 'Repeat Password',
-                    'attr' => ['class' => 'uk-width-1-1', 'placeholder' => 'user.placeholder.repeat_password.label']
                 ],
                 'invalid_message' => 'Passwords do not match!',
             ]);

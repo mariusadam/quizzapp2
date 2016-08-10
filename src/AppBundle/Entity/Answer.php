@@ -42,7 +42,7 @@ class Answer
      */
     public function __construct()
     {
-        $this->correct = false;
+        //$this->correct = false;
     }
 
     /**

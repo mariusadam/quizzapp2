@@ -3,6 +3,7 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Form\FormMapper;
 
 /**
  * Class AnswerAdmin.
@@ -12,5 +13,13 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
  */
 class AnswerAdmin extends AbstractAdmin
 {
+
+    public function configureFormFields(FormMapper $form)
+    {
+        $form
+            ->add('rawText')
+            ->add('correct')
+        ;
+    }
 
 }
