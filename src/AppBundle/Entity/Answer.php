@@ -34,6 +34,7 @@ class Answer
      * @var bool
      *
      * @ORM\Column(name="correct", type="boolean")
+     * @Assert\Type(type="bool")
      */
     private $correct;
 

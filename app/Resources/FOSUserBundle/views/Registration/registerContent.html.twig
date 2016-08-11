@@ -1,0 +1,46 @@
+<div class="form-container">
+
+    {{ form_errors(form) }}
+
+    <form novalidate class="form-horizontal" role="form" action="{{ path("fos_user_registration_register") }}" method="post">
+        {{ form_widget(form._token) }}
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">{{ form_label(form.firstName) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.firstName) }}
+                {{ form_errors(form.firstName) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">{{ form_label(form.lastName) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.lastName) }}
+                {{ form_errors(form.lastName) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">{{ form_label(form.email) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">{{ form_label(form.plainPassword) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.plainPassword) }}
+                {{ form_errors(form.plainPassword) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+            </div>
+        </div>
+    </form>
+</div>

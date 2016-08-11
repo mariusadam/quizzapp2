@@ -6,6 +6,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManager;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use FOS\UserBundle\Model\UserInterface;
 
@@ -19,6 +20,11 @@ class FOSUserSubscriber implements EventSubscriberInterface
 {
 
     /**
+     * @var TokenGeneratorInterface
+     */
+    protected $tokenGenerator;
+
+    /**
      * @var UserManager
      */
     protected $userManager;
@@ -27,10 +33,12 @@ class FOSUserSubscriber implements EventSubscriberInterface
      * FOSUserSubscriber constructor.
      *
      * @param UserManager $userManager
+     * @param TokenGeneratorInterface $tokenGenerator
      */
-    public function __construct(UserManager $userManager)
+    public function __construct(UserManager $userManager, TokenGeneratorInterface $tokenGenerator)
     {
         $this->userManager = $userManager;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     /**
@@ -42,7 +50,6 @@ class FOSUserSubscriber implements EventSubscriberInterface
             FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationCompleted',
             FOSUserEvents::CHANGE_PASSWORD_SUCCESS => 'onChangePasswordSuccess',
             FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onProfileEditSuccess',
-            FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLoginSuccess'
         ];
     }
 
@@ -58,7 +65,7 @@ class FOSUserSubscriber implements EventSubscriberInterface
         $username = isset($parts[0]) ? $parts[0] : $user->getEmail();
 
         $user
-            ->setUsername($username)
+            ->setUsername($username . $this->tokenGenerator->generateToken())
             ->addRole('ROLE_USER');
 
         $this->userManager->updateUser($user);

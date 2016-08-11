@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
- * @UniqueEntity(fields={"email"}, groups={"Registration", "Profile"}, message="user.unique.email")
+ * @UniqueEntity(fields={"email"}, groups={"AppRegistration", "AppProfile"}, message="user.unique.email")
  */
 class User extends BaseUser
 {
@@ -24,16 +24,16 @@ class User extends BaseUser
     /**
      * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(groups={"Registration", "Profile"}, message="user.not_blank.first_name")
-     * @Assert\Length(max=255, groups={"Registration", "Profile"}, maxMessage="user.max_length.first_name")
+     * @Assert\NotBlank(groups={"AppRegistration", "AppProfile"}, message="user.not_blank.firstName")
+     * @Assert\Length(max=255, groups={"AppRegistration", "AppProfile"}, maxMessage="user.max_length.firstName")
      */
     protected $firstName;
 
     /**
      * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(groups={"Registration", "Profile"}, message="user.not_blank.last_name")
-     * @Assert\Length(max=255, groups={"Registration", "Profile"}, maxMessage="user.max_length.last_name")
+     * @Assert\NotBlank(groups={"AppRegistration", "AppProfile"}, message="user.not_blank.lastName")
+     * @Assert\Length(max=255, groups={"AppRegistration", "AppProfile"}, maxMessage="user.max_length.lastName")
      */
     protected $lastName;
 

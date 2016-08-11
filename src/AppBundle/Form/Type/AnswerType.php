@@ -31,8 +31,8 @@ class AnswerType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
                 'choices'  => [
-                    'Yes' => true,
-                    'No' => false,
+                    'Yes' => 1,
+                    'No' => 0,
                 ]
             ]);
 

@@ -3,11 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: en
-
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -80,11 +75,11 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\Type\User\RegistrationType
-            validation_groups: [Registration]
+            validation_groups: [AppRegistration]
     profile:
         form:
             type: AppBundle\Form\Type\User\ProfileType
-            validation_groups: [Profile]
+            validation_groups: [AppProfile]
     change_password:
         form:
             validation_groups: [Default, ChangePassword]
@@ -102,3 +97,16 @@ sonata_block:
             cms.list_menu.content_provider: ~
             sonata.admin.block.admin_list:
                 contexts: [admin]
+#
+#jms_translation:
+#    locales: "%available_locales%"
+#    source_language: "%locale%"
+#    configs:
+#        app:
+#            dirs: ["%kernel.root_dir%"]
+#            output_dir: "%kernel.root_dir%/Resources/translations"
+#            ignored_domains: [routes]
+#            excluded_names: ["*TestCase.php", "*Test.php"]
+#            excluded_dirs: [cache, data, logs]
+#            output_format: po
+#            keep: true

@@ -6,6 +6,7 @@ use AppBundle\Entity\Answer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * MultipleChoiceQuestion
@@ -25,6 +26,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
      *      )
      * @Assert\Count(min="1", max="10")
      * @Assert\Valid()
+     * @AppAssert\QuestionAnswers()
      */
     private $answers;
 

@@ -1,43 +1,49 @@
-<header class="fluid-container">
-    <div class="uk-container uk-container-center">
-        <div class="uk-grid">
-            <div class="uk-width-1-2">
-                <nav class="main-menu">
-                    <ul>
-                        <li class="logo-container">
-                            <a href="{{ path("homepage") }}" class="logo">QuizzApp</a>
-                        </li>
+<header class="to-do">
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path("homepage") }}">QuizzApp</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{{ path("homepage") }}">Home</a></li>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <li><a href="{{ path("sonata_admin_dashboard") }}">Dashboard</a></li>
+                        {% endif %}
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li>
+                                <a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user"></span>
+                                    {{ "My account"|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('fos_user_registration_register') }}"><span class="glyphicon glyphicon-user"></span>
+                                    {{ 'layout.register'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-log-in"></span>
+                                    {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            </li>
+                        {% endif %}
 
-                </nav>
-            </div>
-
-            <div class="uk-width-1-2">
-                <div class="uk-clearfix"></div>
-                <nav class="info-menu uk-float-right">
-                    <ul>
-                        <li class="account">
-                            <i class="uk-icon-user"></i>
-                            <p class="uk-clearfix">
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                    <a href="{{ path('fos_user_profile_show') }}">{{ "My account"|trans }}</a>
-                                    <a href="{{ path('fos_user_security_logout') }}">
-                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('fos_user_security_login') }}">
-                                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
-                                    </a>
-                                    <a href="{{ path('fos_user_registration_register') }}">
-                                        {{ 'layout.register'|trans({}, 'FOSUserBundle') }}
-                                    </a>
-                                {% endif %}
-                            </p>
-
-                        </li>
                     </ul>
-                </nav>
+                </div>
             </div>
-        </div>
-    </div>
+        </nav>
+
 </header>

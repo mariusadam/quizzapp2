@@ -26,26 +26,32 @@ class RegistrationType extends AbstractType
             ->remove('username')
             ->add('firstName', 'text', [
                 'required' => true,
-                'label' => 'First name',
+                'attr' => ['class' => 'form-control', 'placeholder' => 'user.placeholder.firstName.label'],
+                'label' => 'user.form.firstName.label',
             ])
             ->add('lastName', 'text', [
                 'required' => true,
-                'label' => 'Last name',
+                'label' => 'user.form.lastName.label',
+                'attr' => ['class' => 'form-control', 'placeholder' => 'user.placeholder.lastName.label'],
             ])
             ->add('email', 'email', [
                 'required' => true,
-                'label' => 'Email',
+                'label' => 'user.form.email.label',
+                'attr' => ['class' => 'form-control', 'placeholder' => 'user.placeholder.email.label'],
             ])
             ->add('plainPassword', 'repeated', [
                 'required' => true,
                 'type' => 'password',
+                'label' => 'user.form.plainPassword.label',
                 'first_options' => [
-                    'label' => 'Password',
+                    'label' => 'user.form.password.label',
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'user.placeholder.password.label'],
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'label' => 'user.form.password_repeat.label',
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'user.placeholder.password_repeat.label'],
                 ],
-                'invalid_message' => 'Passwords do not match!',
+                'invalid_message' => 'user.form.password_mismatch',
             ]);
     }
 

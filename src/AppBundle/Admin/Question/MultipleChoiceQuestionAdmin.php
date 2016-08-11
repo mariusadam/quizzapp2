@@ -20,26 +20,12 @@ class MultipleChoiceQuestionAdmin extends AbstractAdmin
     public function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('rawText', null, ['label' => 'Question text'])
+            ->add('rawText', null, ['label' => 'app.entity.multiple_question.rawtext.label'])
             ->add('answers', 'collection', [
                 'entry_type' => AnswerType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'label' => 'Add one or more answers.',
-                'constraints' => [
-                    new Callback(function($answers, ExecutionContextInterface $context) {
-                        $nrOfCorrectAnswers = 0;
-                        /** @var Answer $answer */
-                        foreach ($answers as $answer) {
-                            if($answer->getCorrect() === true) {
-                                $nrOfCorrectAnswers++;
-                            }
-                        }
-                        if ($nrOfCorrectAnswers == 0) {
-                            $context->addViolation('There should be at least one correct answer.');
-                        }
-                    }),
-                ]
             ])
             ->add('category')
         ;
@@ -55,7 +41,7 @@ class MultipleChoiceQuestionAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $list
-            ->add('rawText')
+            ->add('rawText', null, ['label' => 'app.entity.multiple_question.rawtext.label'])
             ->add('answers', 'collection')
             ->add('category')
             ->add('_action', 'actions', [
