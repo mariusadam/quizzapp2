@@ -43,16 +43,33 @@ class AppKernel extends Kernel
 
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+        if ($this->isAppOnNfs()) {
+            return '/tmp/quizzapp/cache/' . $this->getEnvironment();
+        }
+
+        return parent::getCacheDir();
     }
 
     public function getLogDir()
     {
-        return dirname(__DIR__).'/var/logs';
+        if ($this->isAppOnNfs()) {
+            return '/tmp/quizzapp/logs';
+        }
+
+        return parent::getLogDir();
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    /**
+     * @return bool
+     */
+    private function isAppOnNfs()
+    {
+        $appOnNfs = getenv('APP_ON_NFS');
+        return $appOnNfs ? $appOnNfs === 'true' : false;
     }
 }
