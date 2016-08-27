@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% set headerContClass = (headerContClass is defined) ? headerContClass : 'short-head' %}
+
+{% block body %}
+    <div class="header-container {{ headerContClass }}">
+        {% block header %}
+            {% include(':Partials:header.html.twig') %}
+        {% endblock %}
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% include(':Partials:footer.html.twig') %}
+{% endblock %}

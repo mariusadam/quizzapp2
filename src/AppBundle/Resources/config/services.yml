@@ -1,0 +1,8 @@
+services:
+    app.security.authentication.success_handler:
+        class: AppBundle\Security\Http\Authentication\AuthenticationSuccessHandler
+        parent: security.authentication.success_handler
+        public: false
+        calls:
+            - [setAuthorizationChecker, ["@security.authorization_checker"]]
+

@@ -1,0 +1,25 @@
+services:
+    app.admin.simple_question:
+        class: AppBundle\Admin\Question\SimpleQuestionAdmin
+        arguments: [~, AppBundle\Entity\Question\SimpleQuestion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Simple Questions,  group: Question types}
+
+    app.admin.multiple_choice_question:
+        class: AppBundle\Admin\Question\MultipleChoiceQuestionAdmin
+        arguments: [~, AppBundle\Entity\Question\MultipleChoiceQuestion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Multiple choice questions,  group: Question types}
+
+    app.admin.answer:
+        class: AppBundle\Admin\AnswerAdmin
+        arguments: [~, AppBundle\Entity\Answer, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false}
+
+    app.admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        arguments: [~ , AppBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Categories,  group: Classification}
+
