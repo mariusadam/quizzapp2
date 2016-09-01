@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         #display git branch in prompt
         cat /home/vagrant/.bashrc 2> /dev/null | grep -q 'parse_git_branch'
         if [ ! $? -eq 0 ]; then
-            cat /var/www/quizzappvirtual/files/bash/.bashrc >> /home/vagrant/.bashrc
+            cat /var/www/quizzapp/files/bash/.bashrc >> /home/vagrant/.bashrc
             . /home/vagrant/.bashrc
             echo 'Added git branch support for bash prompt'
         fi

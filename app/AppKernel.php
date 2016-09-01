@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new \JMS\TranslationBundle\JMSTranslationBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -36,23 +36,45 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
     public function getRootDir()
     {
         return __DIR__;
     }
 
+    /**
+     * @return string
+     */
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+        if ($this->isAppOnNfs()) {
+            return '/tmp/quizzapp/cache/'. $this->environment;
+        }
+
+        return parent::getCacheDir();
     }
 
+    /**
+     * @return string
+     */
     public function getLogDir()
     {
-        return dirname(__DIR__).'/var/logs';
+        if ($this->isAppOnNfs()) {
+            return '/tmp/quizzapp/logs';
+        }
+
+        return parent::getLogDir();
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    /**
+     * @return bool|string
+     */
+    private function isAppOnNfs()
     {
-        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+        return getenv('APP_ON_NFS') ? (getenv('APP_ON_NFS') === 'true') : false;
     }
 }
