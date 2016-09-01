@@ -8,7 +8,7 @@ server('prod', 'e11.ehosts.com', 2222)
     ->env('bin/php', '/opt/php56/bin/php')
     ->env('branch', 'develop')
     ->env('env_vars', 'SYMFONY_ENV=prod')
-    ->env('deploy_path', '/home2/quizzsof/public_html')
+    ->env('deploy_path', '/home2/quizzsof')
     ->env('composer_options', 'install --dev --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction')
     ->stage('prod');
 

@@ -12,20 +12,24 @@ set('keep_releases', 5);
 set('dump_assets', false);
 set('shared_files', ['app/config/parameters.yml', 'web/robots.txt']);
 set('shared_dirs', ['web/uploads', 'web/media']);
-set('writable_dirs', ['app/cache', 'app/logs', 'web/uploads', 'web/media']);
+set('writable_dirs', []);
 
 /**
  * PHP-FPM Restart
  */
 task('php-fpm:restart', function () {
     run('sudo /usr/sbin/service php5-fpm restart');
-})->desc('Restart PHP-FPM service');
+})
+    ->desc('Restart PHP-FPM service')
+    ->onlyForStage('local');
 /**
  * Nginx Restart
  */
 task('nginx:restart', function () {
     run('sudo /usr/sbin/service nginx restart');
-})->desc('Restart Nginx service');
+})
+    ->desc('Restart Nginx service')
+    ->onlyForStage('local');
 /**
  * Install bundles assets
  */
@@ -35,8 +39,16 @@ task('assets:install', function() {
 })->desc('Install bundles assets');
 
 task('assets:version', function() {
-    run('sed -i "s/assets_version.*$/assets_version: $(date +%s)/g" {{release_path}}/app/config/parameters.yml');
+    run('sed -i "s/assets_version.*$/assets_version: $(date +%s)/g" {{release_path}}/current/app/config/parameters.yml');
 })->desc('Update assets version');
+
+task('deploy:docroot-symlink', function() {
+    run('public="{{deploy_path}}/public_html"; if [ -d $public ]; then rm -rf $public; else  unlink $public; fi; ln -s {{deploy_path}}/current/web public_html');
+})->desc('Create a symbolic link to web dir');
+
+task('deploy:remove-public_html', function() {
+    run('public="{{deploy_path}}/public_html"; if [ -d $public ]; then rm -rf $public; else  unlink $public; fi;');
+})->desc('Remove public html folder');
 
 /**
  * Cleanup code
@@ -75,6 +87,8 @@ task('install', [
  * Run tasks
  */
 before('deploy:symlink', 'database:migrate');
+before('deploy:release', 'deploy:remove-public_html');
+after('deploy:symlink', 'deploy:docroot-symlink');
 after('deploy:update_code', 'deploy:clear_code');
 after('deploy:update_code', 'deploy:shared');
 after('deploy:assetic:dump', 'assets:install');
